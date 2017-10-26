@@ -1,0 +1,19 @@
+drop table account_details cascade constraints;
+drop table transaction_details cascade constraints;
+drop sequence transaction_id_seq ;
+      
+create table account_details(account_number varchar2(20) primary key,customer_name   varchar2(15),account_type varchar2(15),account_location varchar2(20),balance number(9,2));
+
+create table transaction_details(transaction_id number(10) primary key,transaction_description varchar2(20),transaction_amount number(9,2),transaction_date date, account_number varchar2(20) references account_details(account_number));
+
+insert into account_details values('002601988765',’Vikram Sharma’,'Savings','Powai',7656.00);
+insert into account_details values('002487659871',’ Vikram Sharma’,'Current','Ghatkopar',625.00);
+insert into account_details values('002156783456',’Vaishali S’,'Savings','Thane',70000.00);
+insert into account_details values('003345930083',’Vaishali S’,'Current','Airoli',25000.00);
+
+insert into transaction_details values('1','ATM debit',1000,'12-apr-2014','002601988765');
+insert into transaction_details values('2','Cheque Deposit',5000,'24-aug-2014','002601988765');
+insert into transaction_details values('3','ATM debit',4000,'23-jun-2015',''003345930083'');
+insert into transaction_details values('4','Cash Deposit',6000,'11-aug-2015',''003345930083'');
+
+create sequence transaction_id_seq  start with 5 increment by 1;
